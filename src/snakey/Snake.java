@@ -9,7 +9,6 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 
-
 public class Snake implements ActionListener, KeyListener {
 
     public JFrame gameFrame;
@@ -57,7 +56,7 @@ public class Snake implements ActionListener, KeyListener {
 
 
     public void run() {
-
+        powerUp = new PowerUP(this);
         gameFrame = new JFrame("Snakey");
         gameFrame.setVisible(true);
         gameFrame.setSize(800, 800);
@@ -65,7 +64,6 @@ public class Snake implements ActionListener, KeyListener {
 
         //gameFrame.setLocation(dim.width / 2 - gameFrame.getWidth() / 2, dim.height / 2 - gameFrame.getHeight() / 2);
         gameFrame.setLocationRelativeTo(null);
-        this.powerUp = new PowerUP(this);
         gameFrame.add(renderer = new Renderer());
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameFrame.addKeyListener(this);
@@ -121,32 +119,30 @@ public class Snake implements ActionListener, KeyListener {
 
             body.remove(0);
 
-             if (head == powerUp.cord && powerUp.powerUpType == PowerUP.Type.POINT){
+            if (snake.head == snake.powerUp.cord && snake.powerUp.powerUpType == PowerUP.Type.POINT) {
                 snake.extend();
                 powerUp = new PowerUP(snake);
-             }
-             else if(head == powerUp.cord){
-                 snake.collectPowerUp(powerUp.powerUpType);
-             }
+            } else if (snake.head == snake.powerUp.cord) {
+                snake.collectPowerUp(powerUp.powerUpType);
+            }
         }
     }
 
-    public void extend(){
-        score += 10;
+    public void extend() {
+        snake.score += 10;
         System.out.println("Score:" + score);
-        powerUp = new PowerUP(snake);
-        body.add(new Point(head.x, head.y));
+        snake.powerUp = new PowerUP(snake);
+        snake.body.add(new Point(head.x, head.y));
     }
 
 
-    public void collectPowerUp(PowerUP.Type typeOfPowerUp){
-        if(typeOfPowerUp == PowerUP.Type.SLOW){
-            ticksRatio = 8;
-            powerUp = new PowerUP(snake);
-        }
-        else{
-            ticksRatio = 3;
-            powerUp = new PowerUP(snake);
+    public void collectPowerUp(PowerUP.Type typeOfPowerUp) {
+        if (typeOfPowerUp == PowerUP.Type.SLOW) {
+            snake.ticksRatio = 8;
+            snake.powerUp = new PowerUP(snake);
+        } else {
+            snake.ticksRatio = 3;
+            snake.powerUp = new PowerUP(snake);
         }
 
 
@@ -166,9 +162,10 @@ public class Snake implements ActionListener, KeyListener {
         if (i == KeyEvent.VK_S && direction != UP) direction = DOWN;
         if (i == KeyEvent.VK_D && direction != LEFT) direction = RIGHT;
         if (i == KeyEvent.VK_SPACE)
-            if (gameOver)
-                run();
-            else paused = !paused;
+            if (gameOver) {
+                snake = new Snake();
+                snake.run();
+            } else paused = !paused;
 
     }
 

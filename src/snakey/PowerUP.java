@@ -10,7 +10,7 @@ public class PowerUP {
 
     public PowerUP(Snake snake){
         cord = new Point(random.nextInt(snake.dim.width / snake.SCALE), random.nextInt(snake.dim.height / snake.SCALE));
-        int tempNumberOfRand = random.nextInt()%10;
+        double tempNumberOfRand = random.nextDouble()%10;
         if(tempNumberOfRand <= 8){
             powerUpType = Type.POINT;
         }

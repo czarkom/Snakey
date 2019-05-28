@@ -25,9 +25,15 @@ public class Renderer extends JPanel {
 
         g.fillRect(snake.head.x * Snake.SCALE, snake.head.y * Snake.SCALE,
                 Snake.SCALE, Snake.SCALE);
-
-        g.setColor(Color.RED);
-
+        if(snake.powerUp.powerUpType == PowerUP.Type.SPEED){
+        g.setColor(Color.CYAN);
+        }
+        else if(snake.powerUp.powerUpType == PowerUP.Type.SLOW){
+            g.setColor(Color.WHITE);
+        }
+        else{
+            g.setColor(Color.RED);
+        }
         g.fillRect(snake.powerUp.cord.x * Snake.SCALE, snake.powerUp.cord.y * Snake.SCALE,
                 Snake.SCALE, Snake.SCALE);
 
