@@ -45,8 +45,6 @@ public class Snake implements ActionListener, KeyListener {
         gameFrame.add(renderer = new Renderer());
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameFrame.addKeyListener(this);
-        run();
-
 
     }
 
@@ -76,12 +74,12 @@ public class Snake implements ActionListener, KeyListener {
 
     public static void main(String[] args) {
         snake = new Snake();
+        snake.run();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         renderer.repaint();
-        //gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ticks++;
 
 
