@@ -30,11 +30,12 @@ public class PowerUP {
     public void remake() {
         cord = new Point(random.nextInt(snakey.dim.width / snakey.SCALE), random.nextInt(snakey.dim.height / snakey.SCALE));
         if (counterForPowerUps != 5) {
-            double tempNumberOfRand = random.nextDouble() % 10;
-            if (tempNumberOfRand <= 8) {
+            double tempNumberOfRand = random.nextDouble();
+            System.out.println("RAND: "+ tempNumberOfRand + ", counter status:"+ counterForPowerUps+", generated cords:"+cord);
+            if (tempNumberOfRand <= 0.8) {
                 powerUpType = Type.POINT;
                 counterForPowerUps++;
-            } else if (tempNumberOfRand <= 9) {
+            } else if (tempNumberOfRand <= 0.9) {
                 powerUpType = Type.SLOW;
                 counterForPowerUps = 0;
             } else {
@@ -42,9 +43,9 @@ public class PowerUP {
                 counterForPowerUps = 0;
             }
         } else {
-            double tempNumberOfRand = random.nextDouble() % 10;
-
-            if (tempNumberOfRand <= 5) {
+            double tempNumberOfRand = random.nextDouble();
+            System.out.println("RAND: "+ tempNumberOfRand + ", counter status:"+ counterForPowerUps+", generated cords:"+cord);
+            if (tempNumberOfRand <= 0.5) {
                 powerUpType = Type.SLOW;
                 counterForPowerUps = 0;
             } else {

@@ -37,7 +37,7 @@ public class Snake implements ActionListener, KeyListener {
 
     public Snake() {
 
-        dim = new Dimension(800,800);
+        dim = new Dimension(800, 800);
 
         gameOver = false;
         paused = false;
@@ -83,8 +83,8 @@ public class Snake implements ActionListener, KeyListener {
         ticks++;
 
 
-        System.out.println("Direction: " + direction);
-        System.out.println("Head X: " + head.x + ", Head Y: " + head.y);
+        //System.out.println("Direction: " + direction);
+        //System.out.println("Head X: " + head.x + ", Head Y: " + head.y);
 
 
         if (ticks % ticksRatio == 0 && head != null && !gameOver && !paused) {
@@ -107,7 +107,7 @@ public class Snake implements ActionListener, KeyListener {
                 else gameOver = true;
             }
             if (direction == RIGHT) {
-                if (head.x + 1.9  < dim.width / SCALE)
+                if (head.x + 1.9 < dim.width / SCALE)
                     head = new Point(head.x + 1, head.y);
                 else gameOver = true;
             }
@@ -140,10 +140,12 @@ public class Snake implements ActionListener, KeyListener {
 
 
     public void collectPowerUp(PowerUP.Type typeOfPowerUp) {
-        if (typeOfPowerUp == PowerUP.Type.SLOW) {
+        if (typeOfPowerUp == PowerUP.Type.SLOW && snake.ticksRatio != 5) {
             snake.ticksRatio = 8;
-        } else {
+        } else if (snake.ticksRatio != 5) {
             snake.ticksRatio = 3;
+        } else {
+            ticksRatio = 5;
         }
 
 

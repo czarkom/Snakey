@@ -46,7 +46,7 @@ public class Renderer extends JPanel {
             if (curColor == 0) counter = 0;
         }
 
-        System.out.println("Colors: " + curColor + "," + counter);
+       // System.out.println("Colors: " + curColor + "," + counter);
 
     }
 }
