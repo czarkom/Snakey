@@ -11,6 +11,7 @@ public class Renderer extends JPanel {
 
     @Override
     protected void paintComponent(Graphics g){
+
         super.paintComponent(g);
         g.setColor(new Color(curColor));
         g.fillRect(0,0,800,800);

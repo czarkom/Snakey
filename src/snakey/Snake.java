@@ -37,22 +37,8 @@ public class Snake implements ActionListener, KeyListener {
     public Dimension dim;
 
     public Snake() {
+
         dim = Toolkit.getDefaultToolkit().getScreenSize();
-        gameFrame = new JFrame("Snakey");
-        gameFrame.setVisible(true);
-        gameFrame.setSize(800, 800);
-        gameFrame.setResizable(false);
-
-        gameFrame.setLocation(dim.width / 2 - gameFrame.getWidth() / 2, dim.height / 2 - gameFrame.getHeight() / 2);
-        this.powerUp = new PowerUP(this);
-        gameFrame.add(renderer = new Renderer());
-        gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        gameFrame.addKeyListener(this);
-
-    }
-
-
-    public void run() {
 
         gameOver = false;
         paused = false;
@@ -66,6 +52,23 @@ public class Snake implements ActionListener, KeyListener {
         for (int i = 0; i < 10; i++) {
             body.add(new Point(head.x, head.y));
         }
+
+    }
+
+
+    public void run() {
+
+        gameFrame = new JFrame("Snakey");
+        gameFrame.setVisible(true);
+        gameFrame.setSize(800, 800);
+        gameFrame.setResizable(false);
+
+        //gameFrame.setLocation(dim.width / 2 - gameFrame.getWidth() / 2, dim.height / 2 - gameFrame.getHeight() / 2);
+        gameFrame.setLocationRelativeTo(null);
+        this.powerUp = new PowerUP(this);
+        gameFrame.add(renderer = new Renderer());
+        gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        gameFrame.addKeyListener(this);
 
         timer.start();
 
@@ -120,6 +123,7 @@ public class Snake implements ActionListener, KeyListener {
 
              if (head == powerUp.cord && powerUp.powerUpType == PowerUP.Type.POINT){
                 snake.extend();
+                powerUp = new PowerUP(snake);
              }
              else if(head == powerUp.cord){
                  snake.collectPowerUp(powerUp.powerUpType);
