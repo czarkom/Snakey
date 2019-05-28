@@ -121,7 +121,7 @@ public class Snake implements ActionListener, KeyListener {
              if (head == powerUp.cord && powerUp.powerUpType == PowerUP.Type.POINT){
                 snake.extend();
              }
-             else{
+             else if(head == powerUp.cord){
                  snake.collectPowerUp(powerUp.powerUpType);
              }
         }
@@ -138,9 +138,11 @@ public class Snake implements ActionListener, KeyListener {
     public void collectPowerUp(PowerUP.Type typeOfPowerUp){
         if(typeOfPowerUp == PowerUP.Type.SLOW){
             ticksRatio = 8;
+            powerUp = new PowerUP(snake);
         }
         else{
             ticksRatio = 3;
+            powerUp = new PowerUP(snake);
         }
 
 
