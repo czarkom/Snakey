@@ -9,7 +9,7 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Random;
 
-import static com.sun.webkit.graphics.GraphicsDecoder.SCALE;
+//import static com.sun.webkit.graphics.GraphicsDecoder.SCALE;
 
 public class Snake implements ActionListener, KeyListener {
 
@@ -20,10 +20,10 @@ public class Snake implements ActionListener, KeyListener {
 
     public Timer timer = new Timer(10, this);
 
-    public ArrayList<Point> body = new ArrayList<Point>();
+    public ArrayList<Point> body = new ArrayList<>();
 
-    public int ticks = 0, direction = DOWN, score, taillength = 10;
-
+    public int ticks = 0, direction = DOWN, score, tailLength = 10;
+                                                                                 
     public Point head, powerup;
 
     public static final int UP = 0, DOWN = 1, LEFT = 2, RIGHT =3, SCALE = 10;
@@ -56,7 +56,7 @@ public class Snake implements ActionListener, KeyListener {
         over = false;
         paused = false;
         score = 0;
-        taillength = 10;
+        tailLength = 10;
         direction = DOWN;
 
         body.clear();
@@ -67,7 +67,7 @@ public class Snake implements ActionListener, KeyListener {
         powerup = new Point(dim.width / SCALE, dim.height / SCALE);
 
 
-        for (int i = 0; i < taillength; i++){
+        for (int i = 0; i < tailLength; i++){
             body.add(new Point(head.x, head.y));
         }
 
@@ -88,7 +88,7 @@ public class Snake implements ActionListener, KeyListener {
 
 
 
-        if(ticks % 10 == 0 && head != null && over != true && !paused){
+        if(ticks % 10 == 0 && head != null && !over && !paused){
 
             body.add(new Point(head.x, head.y));
             if (direction == DOWN)
@@ -132,7 +132,7 @@ public class Snake implements ActionListener, KeyListener {
                 if (head.x == powerup.x && head.y == powerup.y)
                 {
                     score += 10;
-                    taillength++;
+                    tailLength++;
                     powerup.setLocation(dim.width / SCALE, dim.height / SCALE);
                 }
             }

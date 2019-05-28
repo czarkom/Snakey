@@ -5,8 +5,8 @@ import java.awt.*;
 
 public class Renderer extends JPanel {
 
-    public  static int curColor = 0;
-    public static int counter = 0;
+      static int curColor = 0;
+      static int counter = 0; //czemu static?
 
 
     @Override
