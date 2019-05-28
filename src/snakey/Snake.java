@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
-import java.util.Random;
+
 
 
 public class Snake implements ActionListener, KeyListener {
@@ -24,13 +24,13 @@ public class Snake implements ActionListener, KeyListener {
 
     public int ticks = 0, direction = DOWN, score;
 
-    public Point head, powerUp;
+    public Point head;
+
+    public PowerUP powerUp;
 
     public static final int UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3, SCALE = 10;
 
     public boolean gameOver = false, paused;
-
-    public Random random;
 
     public Dimension dim;
 
@@ -60,8 +60,7 @@ public class Snake implements ActionListener, KeyListener {
 
         head = new Point(0, 0);
 
-        random = new Random();
-        powerUp = new Point(random.nextInt(dim.width / SCALE), random.nextInt(dim.height / SCALE));
+        PowerUP powerUp = new PowerUP(snake);
 
 
         for (int i = 0; i < 10; i++) {
@@ -87,7 +86,7 @@ public class Snake implements ActionListener, KeyListener {
         System.out.println("Head X: " + head.x + ", Head Y: " + head.y);
 
 
-        if (ticks % 10 == 0 && head != null && !gameOver && !paused) {
+        if (ticks % 5 == 0 && head != null && !gameOver && !paused) {
 
             body.add(new Point(head.x, head.y));
             if (direction == DOWN) {
@@ -119,18 +118,34 @@ public class Snake implements ActionListener, KeyListener {
 
             body.remove(0);
 
-
-            if (powerUp != null) {
-                if (head.x == powerUp.x && head.y == powerUp.y) {
-                    score += 10;
-                    System.out.println("Score:" + score);
-                    powerUp.setLocation(random.nextInt(dim.width / SCALE), random.nextInt(dim.height / SCALE));
-                    body.add(new Point(head.x, head.y));
-
-                }
-            }
+             if (head == powerUp.cord && powerUp.powerUpType == PowerUP.Type.POINT){
+                snake.extend();
+             }
+             else{
+                 snake.collectPowerUp(powerUp.powerUpType);
+             }
         }
     }
+
+    public void extend(){
+        score += 10;
+        System.out.println("Score:" + score);
+        powerUp = new PowerUP(snake);
+        body.add(new Point(head.x, head.y));
+    }
+
+
+    public void collectPowerUp(PowerUP.Type typeOfPowerUp){
+        if(typeOfPowerUp == PowerUP.Type.SLOW){
+            ticks = 10;
+        }
+        else{
+            ticks = 3;
+        }
+
+
+    }
+
 
     @Override
     public void keyTyped(KeyEvent e) {

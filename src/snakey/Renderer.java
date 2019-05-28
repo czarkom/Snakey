@@ -27,14 +27,14 @@ public class Renderer extends JPanel {
 
         g.setColor(Color.RED);
 
-        g.fillRect(snake.powerUp.x * Snake.SCALE, snake.powerUp.y * Snake.SCALE,
+        g.fillRect(snake.powerUp.cord.x * Snake.SCALE, snake.powerUp.cord.y * Snake.SCALE,
                 Snake.SCALE, Snake.SCALE);
 
-        if(counter < 250){
+        if(counter < 30){
             curColor = counter;
             counter++;
         }
-        if(counter == 250){
+        if(counter == 30){
             curColor--;
             if (curColor == 0) counter = 0;
         }
