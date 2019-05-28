@@ -67,6 +67,7 @@ public class Snake implements ActionListener, KeyListener {
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameFrame.addKeyListener(this);
 
+        gameOver = false;
         timer.start();
 
     }
@@ -164,11 +165,13 @@ public class Snake implements ActionListener, KeyListener {
         if (i == KeyEvent.VK_W && direction != DOWN) direction = UP;
         if (i == KeyEvent.VK_S && direction != UP) direction = DOWN;
         if (i == KeyEvent.VK_D && direction != LEFT) direction = RIGHT;
-        if (i == KeyEvent.VK_SPACE)
+        if (i == KeyEvent.VK_SPACE)       {
+               System.out.println("gameOver:" + gameOver);
             if (gameOver) {
+
                 snake = new Snake();
                 snake.run();
-            } else paused = !paused;
+            } else paused = !paused;   }
 
     }
 
