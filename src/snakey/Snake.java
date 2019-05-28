@@ -119,7 +119,7 @@ public class Snake implements ActionListener, KeyListener {
 
             body.remove(0);
 
-            if (snake.head == snake.powerUp.cord) {
+            if (snake.head.equals(snake.powerUp.cord)) {
                 System.out.println("ATTEMPT TO COLLECT");
                 if (snake.powerUp.powerUpType == PowerUP.Type.POINT) {
                     snake.extend();
