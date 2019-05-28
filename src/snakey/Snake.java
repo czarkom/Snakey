@@ -37,7 +37,7 @@ public class Snake implements ActionListener, KeyListener {
 
     public Snake() {
 
-        dim = Toolkit.getDefaultToolkit().getScreenSize();
+        dim = new Dimension(800,800);
 
         gameOver = false;
         paused = false;
@@ -91,7 +91,7 @@ public class Snake implements ActionListener, KeyListener {
 
             body.add(new Point(head.x, head.y));
             if (direction == DOWN) {
-                if (head.y + 1 < dim.height / SCALE)
+                if (head.y + 4 < dim.height / SCALE)
                     head = new Point(head.x, head.y + 1);
                 else gameOver = true;
             }
@@ -107,7 +107,7 @@ public class Snake implements ActionListener, KeyListener {
                 else gameOver = true;
             }
             if (direction == RIGHT) {
-                if (head.x + 1 < dim.width / SCALE)
+                if (head.x + 1.9  < dim.width / SCALE)
                     head = new Point(head.x + 1, head.y);
                 else gameOver = true;
             }
