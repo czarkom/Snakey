@@ -11,12 +11,16 @@ public class Renderer extends JPanel {
 
     static int curColor = 0;
     static int counter = 0; //czemu static?
-    BufferedImage SBImage, SHRImage;
+    BufferedImage SBImage, SHImage, SHRImage, SHLImage, SHUImage, SHDImage, SBLRImage, SBUDImage;
 
     private void loadImages() {
         try {
-            SBImage = ImageIO.read(new File("visuals/skin.png"));
+            SBLRImage = ImageIO.read(new File("visuals/skin.png"));
+            SBUDImage = ImageIO.read(new File("visuals/skinUD.png"));
             SHRImage = ImageIO.read(new File("visuals/headRight.png"));
+            SHLImage = ImageIO.read(new File("visuals/headLeft.png"));
+            SHUImage = ImageIO.read(new File("visuals/headUp.png"));
+            SHDImage = ImageIO.read(new File("visuals/headDown.png"));
         } catch (
                 IOException ioe) {
             ioe.printStackTrace();
@@ -29,13 +33,29 @@ public class Renderer extends JPanel {
         super.paintComponent(g);
         g.setColor(new Color(curColor));
         g.fillRect(0, 0, 800, 800);
-        Snake snake = Snake.snake;;
+        Snake snake = Snake.snake;
+        ;
+
+        if (snake.direction == Snake.UP) {
+            SHImage = SHUImage;
+            SBImage = SBUDImage;
+        } else if (snake.direction == Snake.DOWN) {
+            SHImage = SHDImage;
+            SBImage = SBUDImage;
+        } else if (snake.direction == Snake.LEFT) {
+            SHImage = SHLImage;
+            SBImage = SBLRImage;
+
+        } else if (snake.direction == Snake.RIGHT) {
+            SHImage = SHRImage;
+            SBImage = SBLRImage;
+        }
 
         for (Point point : snake.body) {
             g.drawImage(SBImage, point.x * Snake.SCALE, point.y * Snake.SCALE, Snake.SCALE, Snake.SCALE, null);
         }
 
-        g.drawImage(SHRImage, snake.head.x * Snake.SCALE, snake.head.y * Snake.SCALE, Snake.SCALE, Snake.SCALE, null);
+        g.drawImage(SHImage, snake.head.x * Snake.SCALE, snake.head.y * Snake.SCALE, Snake.SCALE, Snake.SCALE, null);
 
         if (snake.powerUp.powerUpType == PowerUP.Type.SPEED) {
             g.setColor(Color.CYAN);
