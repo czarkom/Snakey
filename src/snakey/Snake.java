@@ -44,6 +44,7 @@ public class Snake implements ActionListener, KeyListener {
         gameFrame.setResizable(false);
 
         gameFrame.setLocation(dim.width / 2 - gameFrame.getWidth() / 2, dim.height / 2 - gameFrame.getHeight() / 2);
+        this.powerUp = new PowerUP(this);
         gameFrame.add(renderer = new Renderer());
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameFrame.addKeyListener(this);
@@ -61,9 +62,6 @@ public class Snake implements ActionListener, KeyListener {
         body.clear();
 
         head = new Point(0, 0);
-
-        PowerUP powerUp = new PowerUP(snake);
-
 
         for (int i = 0; i < 10; i++) {
             body.add(new Point(head.x, head.y));
