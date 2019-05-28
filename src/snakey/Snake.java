@@ -119,11 +119,15 @@ public class Snake implements ActionListener, KeyListener {
 
             body.remove(0);
 
-            if (snake.head == snake.powerUp.cord && snake.powerUp.powerUpType == PowerUP.Type.POINT) {
-                snake.extend();
-                powerUp = new PowerUP(snake);
-            } else if (snake.head == snake.powerUp.cord) {
-                snake.collectPowerUp(powerUp.powerUpType);
+            if (snake.head == snake.powerUp.cord) {
+                System.out.println("ATTEMPT TO COLLECT");
+                if (snake.powerUp.powerUpType == PowerUP.Type.POINT) {
+                    snake.extend();
+                    powerUp = new PowerUP(snake);
+                } else {
+                    snake.collectPowerUp(powerUp.powerUpType);
+                    powerUp = new PowerUP(snake);
+                }
             }
         }
     }
@@ -131,7 +135,6 @@ public class Snake implements ActionListener, KeyListener {
     public void extend() {
         snake.score += 10;
         System.out.println("Score:" + score);
-        snake.powerUp = new PowerUP(snake);
         snake.body.add(new Point(head.x, head.y));
     }
 
@@ -139,10 +142,8 @@ public class Snake implements ActionListener, KeyListener {
     public void collectPowerUp(PowerUP.Type typeOfPowerUp) {
         if (typeOfPowerUp == PowerUP.Type.SLOW) {
             snake.ticksRatio = 8;
-            snake.powerUp = new PowerUP(snake);
         } else {
             snake.ticksRatio = 3;
-            snake.powerUp = new PowerUP(snake);
         }
 
 
