@@ -27,7 +27,7 @@ public class Renderer extends JPanel {
 
         g.setColor(Color.RED);
 
-        g.fillRect(snake.powerup.x * Snake.SCALE, snake.powerup.y * Snake.SCALE,
+        g.fillRect(snake.powerUp.x * Snake.SCALE, snake.powerUp.y * Snake.SCALE,
                 Snake.SCALE, Snake.SCALE);
 
         if(counter < 250){
