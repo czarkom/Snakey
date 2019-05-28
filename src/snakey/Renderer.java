@@ -15,7 +15,7 @@ public class Renderer extends JPanel {
         g.setColor(new Color(curColor));
         g.fillRect(0,0,800,800);
         Snake snake = Snake.snake;
-        g.setColor(Color.MAGENTA);
+        g.setColor(Color.YELLOW);
 
         for (Point point : snake.body){
             g.fillRect(point.x * Snake.SCALE, point.y * Snake.SCALE,
@@ -23,6 +23,11 @@ public class Renderer extends JPanel {
         }
 
         g.fillRect(snake.head.x * Snake.SCALE, snake.head.y * Snake.SCALE,
+                Snake.SCALE, Snake.SCALE);
+
+        g.setColor(Color.RED);
+
+        g.fillRect(snake.powerup.x * Snake.SCALE, snake.powerup.y * Snake.SCALE,
                 Snake.SCALE, Snake.SCALE);
 
         if(counter < 250){

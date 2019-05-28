@@ -9,7 +9,7 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Random;
 
-//import static com.sun.webkit.graphics.GraphicsDecoder.SCALE;
+import static com.sun.webkit.graphics.GraphicsDecoder.SCALE;
 
 public class Snake implements ActionListener, KeyListener {
 
@@ -20,10 +20,10 @@ public class Snake implements ActionListener, KeyListener {
 
     public Timer timer = new Timer(10, this);
 
-    public ArrayList<Point> body = new ArrayList<>();
+    public ArrayList<Point> body = new ArrayList<Point>();
 
-    public int ticks = 0, direction = DOWN, score, tailLength = 10;
-                                                                                 
+    public int ticks = 0, direction = DOWN, score, taillength = 0;
+
     public Point head, powerup;
 
     public static final int UP = 0, DOWN = 1, LEFT = 2, RIGHT =3, SCALE = 10;
@@ -56,7 +56,7 @@ public class Snake implements ActionListener, KeyListener {
         over = false;
         paused = false;
         score = 0;
-        tailLength = 10;
+        //taillength = 10;
         direction = DOWN;
 
         body.clear();
@@ -64,12 +64,12 @@ public class Snake implements ActionListener, KeyListener {
         head = new Point(0,0);
 
         random = new Random();
-        powerup = new Point(dim.width / SCALE, dim.height / SCALE);
+        powerup = new Point(random.nextInt(dim.width / SCALE), random.nextInt(dim.height / SCALE));
 
 
-        for (int i = 0; i < tailLength; i++){
+        /**for (int i = 0; i < taillength; i++){
             body.add(new Point(head.x, head.y));
-        }
+        }*/
 
         timer.start();
 
@@ -81,14 +81,16 @@ public class Snake implements ActionListener, KeyListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         renderer.repaint();
+        //gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ticks++;
 
 
         System.out.println("Direction: " + direction);
+        System.out.println("Head X: " + head.x + ", Head Y: " + head.y);
 
 
 
-        if(ticks % 10 == 0 && head != null && !over && !paused){
+        if(ticks % 10 == 0 && head != null && over != true && !paused){
 
             body.add(new Point(head.x, head.y));
             if (direction == DOWN)
@@ -117,6 +119,10 @@ public class Snake implements ActionListener, KeyListener {
                 else over = true;
             }
 
+            for (Point point : snake.body){
+                if (point.x == head.x && point.y == head.y) over = true;
+            }
+
             //head = body.get(body.size() - 1);
 
             /**for ( int i = 0; i < taillength; i++)
@@ -132,8 +138,13 @@ public class Snake implements ActionListener, KeyListener {
                 if (head.x == powerup.x && head.y == powerup.y)
                 {
                     score += 10;
-                    tailLength++;
-                    powerup.setLocation(dim.width / SCALE, dim.height / SCALE);
+                    taillength ++;
+                    System.out.println("Taillenght: " + taillength + "Score:" + score);
+                    powerup.setLocation(random.nextInt(dim.width / SCALE), random.nextInt(dim.height / SCALE));
+
+                    for (int i = 0; i < taillength; i++){
+                        body.add(new Point(head.x, head.y));
+                    }
                 }
             }
         }
