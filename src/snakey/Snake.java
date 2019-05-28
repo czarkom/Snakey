@@ -22,7 +22,7 @@ public class Snake implements ActionListener, KeyListener {
 
     public ArrayList<Point> body = new ArrayList<Point>();
 
-    public int ticks = 0, direction = DOWN, score, taillength = 10;
+    public int ticks = 0, direction = DOWN, score, taillength = 0;
 
     public Point head, powerup;
 
@@ -56,7 +56,7 @@ public class Snake implements ActionListener, KeyListener {
         over = false;
         paused = false;
         score = 0;
-        taillength = 10;
+        //taillength = 10;
         direction = DOWN;
 
         body.clear();
@@ -67,9 +67,9 @@ public class Snake implements ActionListener, KeyListener {
         powerup = new Point(random.nextInt(dim.width / SCALE), random.nextInt(dim.height / SCALE));
 
 
-        for (int i = 0; i < taillength; i++){
+        /**for (int i = 0; i < taillength; i++){
             body.add(new Point(head.x, head.y));
-        }
+        }*/
 
         timer.start();
 
@@ -86,6 +86,7 @@ public class Snake implements ActionListener, KeyListener {
 
 
         System.out.println("Direction: " + direction);
+        System.out.println("Head X: " + head.x + ", Head Y: " + head.y);
 
 
 
@@ -137,8 +138,13 @@ public class Snake implements ActionListener, KeyListener {
                 if (head.x == powerup.x && head.y == powerup.y)
                 {
                     score += 10;
-                    taillength++;
+                    taillength ++;
+                    System.out.println("Taillenght: " + taillength + "Score:" + score);
                     powerup.setLocation(random.nextInt(dim.width / SCALE), random.nextInt(dim.height / SCALE));
+
+                    for (int i = 0; i < taillength; i++){
+                        body.add(new Point(head.x, head.y));
+                    }
                 }
             }
         }
