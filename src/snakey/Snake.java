@@ -123,10 +123,10 @@ public class Snake implements ActionListener, KeyListener {
                 System.out.println("ATTEMPT TO COLLECT");
                 if (snake.powerUp.powerUpType == PowerUP.Type.POINT) {
                     snake.extend();
-                    powerUp = new PowerUP(snake);
+                    powerUp.remake();
                 } else {
                     snake.collectPowerUp(powerUp.powerUpType);
-                    powerUp = new PowerUP(snake);
+                    powerUp.remake();
                 }
             }
         }
