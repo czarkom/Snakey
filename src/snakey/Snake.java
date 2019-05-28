@@ -4,12 +4,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Random;
 
 import static com.sun.webkit.graphics.GraphicsDecoder.SCALE;
 
-public class Snake implements ActionListener {
+public class Snake implements ActionListener, KeyListener {
 
     public JFrame gameFrame;
 
@@ -37,9 +39,11 @@ public class Snake implements ActionListener {
         gameFrame = new JFrame("Snakey");
         gameFrame.setVisible(true);
         gameFrame.setSize(800,800);
+
         gameFrame.setLocation(dim.width/2 - gameFrame.getWidth()/2, dim.height/2 - gameFrame.getHeight()/2);
         gameFrame.add(renderer = new Renderer());
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         head = new Point(0,0);
 
         random = new Random();
@@ -49,6 +53,7 @@ public class Snake implements ActionListener {
         for (int i = 0; i < taillength; i++){
             body.add(new Point(head.x, head.y));
         }
+        gameFrame.addKeyListener(this);
         timer.start();
     }
 
@@ -62,6 +67,9 @@ public class Snake implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         renderer.repaint();
         ticks++;
+
+
+        System.out.println("Direction: " + direction);
 
 
 
@@ -101,6 +109,8 @@ public class Snake implements ActionListener {
                 body.remove(0);
             }*/
 
+            body.remove(0);
+
 
 
             if (powerup != null){
@@ -112,5 +122,25 @@ public class Snake implements ActionListener {
                 }
             }
         }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        int i = e.getKeyCode();
+        if ( i == KeyEvent.VK_A && direction != RIGHT) direction = LEFT;
+        if ( i == KeyEvent.VK_W && direction != DOWN) direction = UP;
+        if ( i == KeyEvent.VK_S && direction != UP) direction = DOWN;
+        if ( i == KeyEvent.VK_D && direction != LEFT) direction = RIGHT;
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
     }
 }
