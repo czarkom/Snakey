@@ -141,9 +141,9 @@ public class Snake implements ActionListener, KeyListener {
 
 
     public void collectPowerUp(PowerUP.Type typeOfPowerUp) {
-        if (typeOfPowerUp == PowerUP.Type.SLOW && snake.ticksRatio != 5) {
-            snake.ticksRatio = 8;
-        } else if (snake.ticksRatio != 5) {
+        if (typeOfPowerUp == PowerUP.Type.SLOW && snake.ticksRatio == 5) {
+            snake.ticksRatio = 10;
+        } else if (snake.ticksRatio == 5) {
             snake.ticksRatio = 3;
         } else {
             ticksRatio = 5;
