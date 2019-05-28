@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class Snake implements ActionListener, KeyListener {
 
-    public JFrame gameFrame;
+    public static JFrame gameFrame;
 
     int ticksRatio = 5;
 
@@ -57,7 +57,6 @@ public class Snake implements ActionListener, KeyListener {
 
     public void run() {
         powerUp = new PowerUP(this);
-        gameFrame = new JFrame("Snakey");
         gameFrame.setVisible(true);
         gameFrame.setSize(800, 800);
         gameFrame.setResizable(false);
@@ -73,6 +72,7 @@ public class Snake implements ActionListener, KeyListener {
     }
 
     public static void main(String[] args) {
+        gameFrame = new JFrame();
         snake = new Snake();
         snake.run();
     }
