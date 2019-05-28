@@ -14,6 +14,8 @@ public class Snake implements ActionListener, KeyListener {
 
     public JFrame gameFrame;
 
+    int ticksRatio = 5;
+
     public static Snake snake;
 
     public Renderer renderer;
@@ -86,7 +88,7 @@ public class Snake implements ActionListener, KeyListener {
         System.out.println("Head X: " + head.x + ", Head Y: " + head.y);
 
 
-        if (ticks % 5 == 0 && head != null && !gameOver && !paused) {
+        if (ticks % ticksRatio == 0 && head != null && !gameOver && !paused) {
 
             body.add(new Point(head.x, head.y));
             if (direction == DOWN) {
@@ -137,10 +139,10 @@ public class Snake implements ActionListener, KeyListener {
 
     public void collectPowerUp(PowerUP.Type typeOfPowerUp){
         if(typeOfPowerUp == PowerUP.Type.SLOW){
-            ticks = 10;
+            ticksRatio = 8;
         }
         else{
-            ticks = 3;
+            ticksRatio = 3;
         }
 
 
