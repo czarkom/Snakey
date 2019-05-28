@@ -14,6 +14,17 @@ public class Renderer extends JPanel {
         super.paintComponent(g);
         g.setColor(new Color(curColor));
         g.fillRect(0,0,800,800);
+        Snake snake = Snake.snake;
+        g.setColor(Color.MAGENTA);
+
+        for (Point point : snake.body){
+            g.fillRect(point.x * Snake.SCALE, point.y * Snake.SCALE,
+                    Snake.SCALE, Snake.SCALE);
+        }
+
+        g.fillRect(snake.head.x * Snake.SCALE, snake.head.y * Snake.SCALE,
+                Snake.SCALE, Snake.SCALE);
+
         if(counter < 250){
             curColor = counter;
             counter++;
@@ -23,7 +34,7 @@ public class Renderer extends JPanel {
             if (curColor == 0) counter = 0;
         }
 
-        System.out.println(curColor + "," + counter);
+        System.out.println("Colors: " + curColor + "," + counter);
 
     }
 }
