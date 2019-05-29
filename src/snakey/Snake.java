@@ -8,6 +8,31 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
+/*
+*
+*
+* NIE MOZE TAK BYS ZE W SNAKE JEST SNAKE I WSZYSTKO DLA GRY TO GENERUJW MASE BLEDOW
+*
+* MUSIMY REFACTOROWAC TA KLASE NA GAME
+*
+*
+*
+* I STOWRZYC SNAKE W KTORYM BEDA RZECZY FAKTYCZNIE DLA SNAKEA
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+* */
 
 public class Snake implements ActionListener, KeyListener {
 
