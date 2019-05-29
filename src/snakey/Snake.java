@@ -23,7 +23,7 @@ public class Snake implements ActionListener, KeyListener {
 
     public ArrayList<Point> body = new ArrayList<Point>();
 
-    public int ticks = 0, direction , score;
+    int ticks = 0, direction, score;
 
     public Point head;
 
@@ -66,7 +66,7 @@ public class Snake implements ActionListener, KeyListener {
         gameFrame.add(renderer = new Renderer());
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameFrame.addKeyListener(this);
-
+        ticks = 0;
         gameOver = false;
         timer.start();
 
@@ -82,7 +82,7 @@ public class Snake implements ActionListener, KeyListener {
     public void actionPerformed(ActionEvent e) {
         renderer.repaint();
         ticks++;
-
+        System.out.println("Ticks:" + ticks + " ratio:" + ticksRatio + "the must be: " + ticks % ticksRatio);
 
         //System.out.println("Direction: " + direction);
         //System.out.println("Head X: " + head.x + ", Head Y: " + head.y);
@@ -160,23 +160,25 @@ public class Snake implements ActionListener, KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        int i = e.getKeyCode();
-        if (i == KeyEvent.VK_A && direction != RIGHT) direction = LEFT;
-        if (i == KeyEvent.VK_W && direction != DOWN) direction = UP;
-        if (i == KeyEvent.VK_S && direction != UP) direction = DOWN;
-        if (i == KeyEvent.VK_D && direction != LEFT) direction = RIGHT;
-        if (i == KeyEvent.VK_SPACE)       {
-               System.out.println("gameOver:" + gameOver);
-            if (gameOver) {
-
-                snake = new Snake();
-                snake.run();
-            } else paused = !paused;   }
-
+        if (!snake.paused && !snake.gameOver) {
+            int i = e.getKeyCode();
+            if (i == KeyEvent.VK_A && direction != RIGHT) direction = LEFT;
+            if (i == KeyEvent.VK_W && direction != DOWN) direction = UP;
+            if (i == KeyEvent.VK_S && direction != UP) direction = DOWN;
+            if (i == KeyEvent.VK_D && direction != LEFT) direction = RIGHT;
+        }
     }
+
 
     @Override
     public void keyReleased(KeyEvent e) {
-
+        int i = e.getKeyCode();
+        if (i == KeyEvent.VK_SPACE) {
+            System.out.println("gameOver:" + gameOver);
+            if (snake.gameOver) {
+                snake = new Snake();
+                snake.run();
+            } else paused = !paused;
+        }
     }
-}
+} 
