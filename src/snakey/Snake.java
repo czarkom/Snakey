@@ -23,7 +23,7 @@ public class Snake implements ActionListener, KeyListener {
 
     public ArrayList<Point> body = new ArrayList<Point>();
 
-    public int ticks = 0, direction = DOWN, score;
+    public int ticks = 0, direction , score;
 
     public Point head;
 
