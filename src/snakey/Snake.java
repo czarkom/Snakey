@@ -54,6 +54,20 @@ public class Snake implements ActionListener, KeyListener {
 
     }
 
+    void restartSnake() {
+        this.gameOver = false;
+        this.paused = false;
+        this.score = 0;
+        this.direction = DOWN;
+        this.body.clear();
+        this.head = null;
+        this.head = new Point(0, 0);
+        for (int i = 0; i < 10; i++) {
+            this.body.add(new Point(this.head.x, this.head.y));
+        }
+        this.run();
+    }
+
 
     public void run() {
         powerUp = new PowerUP(this);
@@ -63,6 +77,9 @@ public class Snake implements ActionListener, KeyListener {
 
         //gameFrame.setLocation(dim.width / 2 - gameFrame.getWidth() / 2, dim.height / 2 - gameFrame.getHeight() / 2);
         gameFrame.setLocationRelativeTo(null);
+        /*if (renderer != null) {
+            gameFrame.remove(renderer);
+        }      */
         gameFrame.add(renderer = new Renderer());
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameFrame.addKeyListener(this);
@@ -84,44 +101,39 @@ public class Snake implements ActionListener, KeyListener {
         ticks++;
         System.out.println("Ticks:" + ticks + " ratio:" + ticksRatio + "the must be: " + ticks % ticksRatio);
 
-        //System.out.println("Direction: " + direction);
-        //System.out.println("Head X: " + head.x + ", Head Y: " + head.y);
-
-
         if (ticks % ticksRatio == 0 && head != null && !gameOver && !paused) {
 
             body.add(new Point(head.x, head.y));
-            if (direction == DOWN) {
-                if (head.y + 4 < dim.height / SCALE)
+            if (snake.direction == DOWN) {
+                if (head.y + 3 < dim.height / SCALE)
                     head = new Point(head.x, head.y + 1);
                 else gameOver = true;
             }
 
-            if (direction == UP) {
+            if (snake.direction == UP) {
                 if (head.y - 1 >= 0)
                     head = new Point(head.x, head.y - 1);
                 else gameOver = true;
             }
-            if (direction == LEFT) {
+            if (snake.direction == LEFT) {
                 if (head.x - 1 >= 0)
                     head = new Point(head.x - 1, head.y);
                 else gameOver = true;
             }
-            if (direction == RIGHT) {
-                if (head.x + 1.9 < dim.width / SCALE)
-                    head = new Point(head.x + 1, head.y);
-                else gameOver = true;
+            if (snake.direction == RIGHT) {
+                if (snake.head.x + 1.9 < (float) dim.width / SCALE)
+                    snake.head = new Point(head.x + 1, head.y);
+                else snake.gameOver = true;
             }
 
             for (Point point : snake.body) {
-                if (point.x == head.x && point.y == head.y) gameOver = true;
+                if (point.x == head.x && point.y == head.y) snake.gameOver = true;
             }
 
 
             body.remove(0);
 
             if (snake.head.equals(snake.powerUp.cord)) {
-                System.out.println("ATTEMPT TO COLLECT");
                 if (snake.powerUp.powerUpType == PowerUP.Type.POINT) {
                     snake.extend();
                     powerUp.remake();
@@ -176,8 +188,8 @@ public class Snake implements ActionListener, KeyListener {
         if (i == KeyEvent.VK_SPACE) {
             System.out.println("gameOver:" + gameOver);
             if (snake.gameOver) {
-                snake = new Snake();
-                snake.run();
+                snake.restartSnake();
+
             } else paused = !paused;
         }
     }
