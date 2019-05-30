@@ -90,7 +90,7 @@ public class Snake implements ActionListener, KeyListener {
         for (int i = 0; i < 10; i++) {
             this.body.add(new Point(this.head.x, this.head.y));
         }
-        this.run();
+        //this.run();
     }
 
 
@@ -130,8 +130,10 @@ public class Snake implements ActionListener, KeyListener {
 
             body.add(new Point(head.x, head.y));
             if (snake.direction == DOWN) {
-                if (head.y + 3 < dim.height / SCALE)
+                if (head.y + 3 < dim.height / SCALE) {
                     head = new Point(head.x, head.y + 1);
+                    System.out.println("Y: " + head.y);
+                }
                 else gameOver = true;
             }
 

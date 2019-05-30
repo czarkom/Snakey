@@ -34,7 +34,7 @@ public class Renderer extends JPanel {
         g.setColor(new Color(curColor));
         g.fillRect(0, 0, 800, 800);
         Snake snake = Snake.snake;
-        ;
+
 
         if (snake.direction == Snake.UP) {
             SHImage = SHUImage;
@@ -42,6 +42,7 @@ public class Renderer extends JPanel {
         } else if (snake.direction == Snake.DOWN) {
             SHImage = SHDImage;
             SBImage = SBUDImage;
+            System.out.println("Picture printed");
         } else if (snake.direction == Snake.LEFT) {
             SHImage = SHLImage;
             SBImage = SBLRImage;
@@ -53,6 +54,7 @@ public class Renderer extends JPanel {
 
         for (Point point : snake.body) {
             g.drawImage(SBImage, point.x * Snake.SCALE, point.y * Snake.SCALE, Snake.SCALE, Snake.SCALE, null);
+            System.out.println("Printed point Y: " + point.y);
         }
 
         g.drawImage(SHImage, snake.head.x * Snake.SCALE, snake.head.y * Snake.SCALE, Snake.SCALE, Snake.SCALE, null);
