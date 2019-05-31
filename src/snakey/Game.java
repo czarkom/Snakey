@@ -15,6 +15,9 @@ public class Game implements ActionListener, KeyListener {
 
     public static final int SCALE = 10;
 
+    Music musicNormal = new Music();
+
+
     public static Game game;
 
     public Renderer renderer;
@@ -137,8 +140,11 @@ public class Game implements ActionListener, KeyListener {
                 powerUp.remake();
 
             }
+
+
         }
     }
+
 
     public void extend() {
         game.score += 10;
@@ -163,6 +169,13 @@ public class Game implements ActionListener, KeyListener {
                 snake.direction = snake.DOWN;
             if (i == KeyEvent.VK_D && snake.direction != snake.LEFT && snake.lastDirection != snake.LEFT)
                 snake.direction = snake.RIGHT;
+            if (i == KeyEvent.VK_M) {
+                if (musicNormal.getMusicState()) {
+                    musicNormal.stopMusic();
+                } else {
+                    musicNormal.playMusic();
+                }
+            }
         }
     }
 
