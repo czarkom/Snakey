@@ -11,12 +11,14 @@ public class Snake {
     int direction;
     public ArrayList<Point> body = new ArrayList<Point>();
     int speed;
+    int lastDirection;
 
     public Snake() {
         this.direction = DOWN;
+        this.lastDirection = DOWN;
         this.body.clear();
         this.head = null;
-        this.head = new Point(0, 0);
+        this.head = new Point(1, 1);
         this.speed = 5;
         for (int i = 0; i < 10; i++) {
             this.body.add(new Point(this.head.x, this.head.y));

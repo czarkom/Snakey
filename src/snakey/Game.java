@@ -23,6 +23,8 @@ public class Game implements ActionListener, KeyListener {
 
     int ticks = 0, score;
 
+    public Wall walls;
+
     public Snake snake;
 
     public PowerUP powerUp;
@@ -34,7 +36,7 @@ public class Game implements ActionListener, KeyListener {
     public Game() {
 
         dim = new Dimension(800, 800);
-
+        walls = new Wall();
         gameOver = false;
         paused = false;
         score = 0;
@@ -85,11 +87,14 @@ public class Game implements ActionListener, KeyListener {
 
         if (ticks % snake.speed == 0 && snake.head != null && !gameOver && !paused) {
 
+            snake.lastDirection = snake.direction;
+
             snake.body.add(new Point(snake.head.x, snake.head.y));
+
             if (snake.direction == snake.DOWN) {
                 if (snake.head.y + 3 < dim.height / SCALE) {
                     snake.head = new Point(snake.head.x, snake.head.y + 1);
-               
+
                 } else gameOver = true;
             }
 
@@ -146,10 +151,14 @@ public class Game implements ActionListener, KeyListener {
     public void keyPressed(KeyEvent e) {
         if (!game.paused && !game.gameOver) {
             int i = e.getKeyCode();
-            if (i == KeyEvent.VK_A && snake.direction != snake.RIGHT) snake.direction = snake.LEFT;
-            if (i == KeyEvent.VK_W && snake.direction != snake.DOWN) snake.direction = snake.UP;
-            if (i == KeyEvent.VK_S && snake.direction != snake.UP) snake.direction = snake.DOWN;
-            if (i == KeyEvent.VK_D && snake.direction != snake.LEFT) snake.direction = snake.RIGHT;
+            if (i == KeyEvent.VK_A && snake.direction != snake.RIGHT && snake.lastDirection != snake.RIGHT)
+                snake.direction = snake.LEFT;
+            if (i == KeyEvent.VK_W && snake.direction != snake.DOWN && snake.lastDirection != snake.DOWN)
+                snake.direction = snake.UP;
+            if (i == KeyEvent.VK_S && snake.direction != snake.UP && snake.lastDirection != snake.UP)
+                snake.direction = snake.DOWN;
+            if (i == KeyEvent.VK_D && snake.direction != snake.LEFT && snake.lastDirection != snake.LEFT)
+                snake.direction = snake.RIGHT;
         }
     }
 

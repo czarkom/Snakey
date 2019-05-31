@@ -11,7 +11,7 @@ public class Renderer extends JPanel {
 
     static int curColor = 0;
     static int counter = 0;
-    BufferedImage SBImage, SHImage, SHRImage, SHLImage, SHUImage, SHDImage, SBLRImage, SBUDImage;
+    BufferedImage SBImage, SHImage, SHRImage, SHLImage, SHUImage, SHDImage, SBLRImage, SBUDImage, WALLImage;
     boolean wasPoweredUp = false;
 
 
@@ -23,6 +23,7 @@ public class Renderer extends JPanel {
             SHLImage = ImageIO.read(new File("visuals/headLeft.png"));
             SHUImage = ImageIO.read(new File("visuals/headUp.png"));
             SHDImage = ImageIO.read(new File("visuals/headDown.png"));
+            WALLImage = ImageIO.read(new File("visuals/wall.png"));
         } catch (
                 IOException ioe) {
             ioe.printStackTrace();
@@ -56,6 +57,11 @@ public class Renderer extends JPanel {
 
         for (Point point : game.snake.body) {
             g.drawImage(SBImage, point.x * Game.SCALE, point.y * Game.SCALE, Game.SCALE, Game.SCALE, null);
+
+        }
+
+        for (Point point : game.walls.cords) {
+            g.drawImage(WALLImage, point.x * Game.SCALE, point.y * Game.SCALE, Game.SCALE, Game.SCALE, null);
 
         }
 
