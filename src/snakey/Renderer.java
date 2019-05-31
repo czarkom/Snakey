@@ -83,9 +83,15 @@ public class Renderer extends JPanel {
             g.fillRect(game.powerUp.specialCord.x * Game.SCALE, game.powerUp.specialCord.y * Game.SCALE,
                     Game.SCALE, Game.SCALE);
         }
+
+            g.setColor(Color.GREEN);
+            g.setFont(new Font("Courier", Font.BOLD, 60));
+            g.drawString("Score: " + game.score, 10, 760);
+
+
         if (game.snake.speed == 5) {
-            if(wasPoweredUp){
-                counter = counter%30;
+            if (wasPoweredUp) {
+                counter = counter % 30;
                 wasPoweredUp = false;
             }
             if (counter < 30) {
@@ -97,8 +103,7 @@ public class Renderer extends JPanel {
                 curColor--;
                 if (curColor == 0) counter = 0;
             }
-        }
-        else {
+        } else {
 
             if (counter < 120) {
                 curColor = counter;

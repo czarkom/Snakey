@@ -113,7 +113,11 @@ public class Game implements ActionListener, KeyListener {
                     snake.head = new Point(snake.head.x + 1, snake.head.y);
                 else gameOver = true;
             }
-
+            for (Point point : game.walls.cords) {
+                if (snake.head.equals(point)) {
+                    gameOver = true;
+                }
+            }
             for (Point point : snake.body) {
                 if (point.x == snake.head.x && point.y == snake.head.y) gameOver = true;
             }
