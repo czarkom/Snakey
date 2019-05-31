@@ -10,7 +10,7 @@ public class Wall {
     public Wall() {
         for (int i = 0; i < 80; i++) {
             for (int j = 0; j < 80; j++) {
-                if (i == 0 || i == 79 || j == 0 || j == 77) {
+                if (i == 0 || i == 79 || j == 0 || j == 70) {
                     cords.add(new Point(i, j));
                 }
             }

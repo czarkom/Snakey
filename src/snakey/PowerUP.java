@@ -19,7 +19,7 @@ public class PowerUP {
     public PowerUP(Game _game) {
         specialAvailable = false;
         game = _game;
-        cord = new Point(random.nextInt((game.dim.width / game.SCALE) - 3) + 1, random.nextInt((game.dim.height / game.SCALE) - 3) + 1);
+        cord = new Point(random.nextInt((game.dim.width / game.SCALE) - 3) + 1, random.nextInt((game.dim.height / game.SCALE) - 12) + 1);
         double tempNumberOfRand = random.nextDouble() % 10;
         powerUpType = Type.POINT;
 
@@ -29,11 +29,11 @@ public class PowerUP {
 
             double tempNumberOfRandSpecial = random.nextDouble();
 
-            specialCord = new Point(random.nextInt((game.dim.width / game.SCALE) - 3) + 1, random.nextInt((game.dim.height / game.SCALE) - 3) + 1);
+            specialCord = new Point(random.nextInt((game.dim.width / game.SCALE) - 3) + 1, random.nextInt((game.dim.height / game.SCALE) - 12) + 1);
 
             if (specialCord.equals(cord)) {
 
-                specialCord = new Point(random.nextInt((game.dim.width / game.SCALE) - 3) + 1, random.nextInt((game.dim.height / game.SCALE) - 3) + 1);
+                specialCord = new Point(random.nextInt((game.dim.width / game.SCALE) - 3) + 1, random.nextInt((game.dim.height / game.SCALE) - 12) + 1);
             }
 
             counterForPowerUps = 0;
@@ -55,7 +55,7 @@ public class PowerUP {
             double tempNumberOfRand = random.nextDouble();
 
             powerUpType = Type.POINT;
-            cord = new Point(random.nextInt((game.dim.width / game.SCALE) - 3) + 1, random.nextInt((game.dim.height / game.SCALE) - 3) + 1);
+            cord = new Point(random.nextInt((game.dim.width / game.SCALE) - 3) + 1, random.nextInt((game.dim.height / game.SCALE) - 12) + 1);
             counterForPowerUps++;
 
             if (tempNumberOfRand <= 0.8) {
@@ -64,11 +64,11 @@ public class PowerUP {
 
                 double tempNumberOfRandSpecial = random.nextDouble();
 
-                specialCord = new Point(random.nextInt((game.dim.width / game.SCALE) - 3) + 1, random.nextInt((game.dim.height / game.SCALE) - 3) + 1);
+                specialCord = new Point(random.nextInt((game.dim.width / game.SCALE) - 3) + 1, random.nextInt((game.dim.height / game.SCALE) - 12) + 1);
 
                 while (specialCord.equals(cord)) {
 
-                    specialCord = new Point(random.nextInt((game.dim.width / game.SCALE) - 3) + 1, random.nextInt((game.dim.height / game.SCALE) - 3) + 1);
+                    specialCord = new Point(random.nextInt((game.dim.width / game.SCALE) - 3) + 1, random.nextInt((game.dim.height / game.SCALE) - 12) + 1);
                 }
                 counterForPowerUps = 0;
                 if (tempNumberOfRandSpecial >= 0.5) {
@@ -85,14 +85,14 @@ public class PowerUP {
                 specialPowerUpType = Type.SLOW;
                 while (specialCord.equals(cord)) {
 
-                    specialCord = new Point(random.nextInt((game.dim.width / game.SCALE) - 3) + 1, random.nextInt((game.dim.height / game.SCALE) - 3) + 1);
+                    specialCord = new Point(random.nextInt((game.dim.width / game.SCALE) - 3) + 1, random.nextInt((game.dim.height / game.SCALE) - 12) + 1);
                 }
                 counterForPowerUps = 0;
             } else {
                 specialPowerUpType = Type.SPEED;
                 while (specialCord.equals(cord)) {
 
-                    specialCord = new Point(random.nextInt((game.dim.width / game.SCALE) - 3) + 1, random.nextInt((game.dim.height / game.SCALE) - 3) + 1);
+                    specialCord = new Point(random.nextInt((game.dim.width / game.SCALE) - 3) + 1, random.nextInt((game.dim.height / game.SCALE) - 12) + 1);
                 }
                 counterForPowerUps = 0;
             }
