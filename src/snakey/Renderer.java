@@ -10,8 +10,10 @@ import java.io.IOException;
 public class Renderer extends JPanel {
 
     static int curColor = 0;
-    static int counter = 0; //czemu static?
+    static int counter = 0;
     BufferedImage SBImage, SHImage, SHRImage, SHLImage, SHUImage, SHDImage, SBLRImage, SBUDImage;
+    boolean wasPoweredUp = false;
+
 
     private void loadImages() {
         try {
@@ -33,49 +35,75 @@ public class Renderer extends JPanel {
         super.paintComponent(g);
         g.setColor(new Color(curColor));
         g.fillRect(0, 0, 800, 800);
-        Snake snake = Snake.snake;
+        Game game = Game.game;
 
 
-        if (snake.direction == Snake.UP) {
+        if (game.snake.direction == Snake.UP) {
             SHImage = SHUImage;
             SBImage = SBUDImage;
-        } else if (snake.direction == Snake.DOWN) {
+        } else if (game.snake.direction == Snake.DOWN) {
             SHImage = SHDImage;
             SBImage = SBUDImage;
-            System.out.println("Picture printed");
-        } else if (snake.direction == Snake.LEFT) {
+
+        } else if (game.snake.direction == Snake.LEFT) {
             SHImage = SHLImage;
             SBImage = SBLRImage;
 
-        } else if (snake.direction == Snake.RIGHT) {
+        } else if (game.snake.direction == Snake.RIGHT) {
             SHImage = SHRImage;
             SBImage = SBLRImage;
         }
 
-        for (Point point : snake.body) {
-            g.drawImage(SBImage, point.x * Snake.SCALE, point.y * Snake.SCALE, Snake.SCALE, Snake.SCALE, null);
-            System.out.println("Printed point Y: " + point.y);
+        for (Point point : game.snake.body) {
+            g.drawImage(SBImage, point.x * Game.SCALE, point.y * Game.SCALE, Game.SCALE, Game.SCALE, null);
+
         }
 
-        g.drawImage(SHImage, snake.head.x * Snake.SCALE, snake.head.y * Snake.SCALE, Snake.SCALE, Snake.SCALE, null);
+        g.drawImage(SHImage, game.snake.head.x * Game.SCALE, game.snake.head.y * Game.SCALE, Game.SCALE, Game.SCALE, null);
 
-        if (snake.powerUp.powerUpType == PowerUP.Type.SPEED) {
-            g.setColor(Color.CYAN);
-        } else if (snake.powerUp.powerUpType == PowerUP.Type.SLOW) {
-            g.setColor(Color.WHITE);
-        } else {
-            g.setColor(Color.RED);
-        }
-        g.fillRect(snake.powerUp.cord.x * Snake.SCALE, snake.powerUp.cord.y * Snake.SCALE,
-                Snake.SCALE, Snake.SCALE);
 
-        if (counter < 30) {
-            curColor = counter;
-            counter++;
+        g.setColor(Color.RED);
+
+        g.fillRect(game.powerUp.cord.x * Game.SCALE, game.powerUp.cord.y * Game.SCALE,
+                Game.SCALE, Game.SCALE);
+        if (game.powerUp.specialAvailable) {
+            if (game.powerUp.specialPowerUpType == PowerUP.Type.SPEED) {
+                g.setColor(Color.CYAN);
+
+            } else if (game.powerUp.specialPowerUpType == PowerUP.Type.SLOW) {
+                g.setColor(Color.WHITE);
+            }
+
+            g.fillRect(game.powerUp.specialCord.x * Game.SCALE, game.powerUp.specialCord.y * Game.SCALE,
+                    Game.SCALE, Game.SCALE);
         }
-        if (counter == 30) {
-            curColor--;
-            if (curColor == 0) counter = 0;
+        if (game.snake.speed == 5) {
+            if(wasPoweredUp){
+                counter = counter%30;
+                wasPoweredUp = false;
+            }
+            if (counter < 30) {
+
+                curColor = counter;
+                counter++;
+            }
+            if (counter == 30) {
+                curColor--;
+                if (curColor == 0) counter = 0;
+            }
+        }
+        else {
+
+            if (counter < 120) {
+                curColor = counter;
+                counter++;
+            }
+            if (counter == 120) {
+                curColor--;
+                if (curColor == 0) counter = 0;
+            }
+            wasPoweredUp = true;
+
         }
 
         // System.out.println("Colors: " + curColor + "," + counter);
