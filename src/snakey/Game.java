@@ -17,7 +17,6 @@ public class Game implements ActionListener, KeyListener {
 
     Music musicNormal = new Music();
 
-
     public static Game game;
 
     public Renderer renderer;
@@ -142,6 +141,12 @@ public class Game implements ActionListener, KeyListener {
             }
 
 
+        } else if (gameOver) {
+
+            if (!musicNormal.gameOverState) {
+                musicNormal.stopMusic();
+                musicNormal.playMusic(1);
+            }
         }
     }
 

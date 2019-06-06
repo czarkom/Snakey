@@ -88,6 +88,13 @@ public class Renderer extends JPanel {
             g.setFont(new Font("Courier", Font.BOLD, 60));
             g.drawString("Score: " + game.score, 10, 760);
 
+            if(game.gameOver){
+                g.setColor(Color.RED);
+                g.setFont(new Font("Courier", Font.BOLD, 60));
+                g.drawString("GAME OVER", 230, 360);
+            }
+
+
 
         if (game.snake.speed == 5) {
             if (wasPoweredUp) {

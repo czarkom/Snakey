@@ -10,7 +10,9 @@ public class Music {
 
 
     private static Clip clip;
+    private static Clip clipGameOver;
     private boolean musicState;
+    public boolean gameOverState;
 
     Music() {
         this.musicState = true;
@@ -23,6 +25,7 @@ public class Music {
                 mixer = AudioSystem.getMixer(mixInfo);
                 DataLine.Info dataInfo = new DataLine.Info(Clip.class, null);
                 clip = (Clip) mixer.getLine(dataInfo);
+                clipGameOver = (Clip) mixer.getLine(dataInfo);
                 break;
             } catch (IllegalArgumentException e) {
 
@@ -33,8 +36,11 @@ public class Music {
 
         try {
 
-                AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File("sounds/normal.wav"));
-                clip.open(audioStream);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(new File("sounds/normal.wav"));
+            clip.open(audioStream);
+
+            AudioInputStream audioStreamGameOver = AudioSystem.getAudioInputStream(new File("sounds/normal.wav"));
+            clipGameOver.open(audioStream);
 
 
         } catch (IOException | LineUnavailableException | UnsupportedAudioFileException e) {
@@ -49,6 +55,14 @@ public class Music {
         clip.loop(Clip.LOOP_CONTINUOUSLY);
         this.musicState = true;
     }
+
+    void playMusic(int number) {
+        if (number != 7698) {
+            clipGameOver.start();
+            gameOverState = true;
+        }
+    }
+
 
     void stopMusic() {
         this.musicState = false;
